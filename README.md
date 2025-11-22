@@ -1,4 +1,4 @@
-# Hands-on: devfest-cloud-seoul-2025: Building AI Agents with Go ADK
+# Hands-on: Building AI Agents with Go ADK, devfest-cloud-seoul-2025
 
 ## English Version
 
@@ -63,9 +63,9 @@ go run main.go [chat|run "Your question"]
 
 ---
 
-# 핸즈온: devfest-cloud-seoul-2025: Go ADK를 활용한 AI 에이전트 구축
+# 핸즈온: Go ADK를 활용한 AI 에이전트 구축, devfest-cloud-seoul-2025
 
-이 저장소는 DevFest Cloud Seoul 2025에서 Google의 **Go용 Agent Development Kit (ADK)**와 Gemini 모델을 활용하여 AI 에이전트를 구축하는 핸즈온 세션 자료를 포함합니다.
+이 저장소는 DevFest Cloud Seoul 2025에서 Google의 **Go용 Agent Development Kit (ADK)** 와 Gemini 모델을 활용하여 AI 에이전트를 구축하는 핸즈온 세션 자료를 포함합니다.
 
 ### 프로젝트 개요
 이 프로젝트는 AI 에이전트 개발의 기본 개념부터 멀티 에이전트 워크플로우 및 분산 시스템과 같은 고급 주제에 이르기까지 다양한 측면을 참가자들에게 안내합니다. `cmd/` 디렉토리의 각 모듈은 ADK 프레임워크를 통한 실습 경험을 제공하는 개별 핸즈온 세션을 나타냅니다.
