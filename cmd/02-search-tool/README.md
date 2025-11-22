@@ -6,12 +6,12 @@
 
 이번 세션에서는 ADK의 강력한 기능인 **Tools(도구)** 시스템을 사용하여, 에이전트에게 **Google Search** 능력을 부여해 보겠습니다. 이제 여러분의 에이전트는 최신 정보를 검색하여 답변할 수 있게 됩니다.
 
-## 🎯 학습 목표
+### 🎯 학습 목표
 *   **ADK Tool Interface** 이해하기
 *   `geminitool` 패키지를 사용하여 Google Search 기능 연동하기
 *   실시간 정보가 필요한 질문에 답변하는 에이전트 구현하기
 
-## 💻 코드 상세 분석
+### 💻 코드 상세 분석
 
 이번 코드는 세션 1과 구조가 비슷하지만, **Tools** 설정 부분이 추가되었습니다. 변경된 부분을 중점적으로 살펴보겠습니다.
 
@@ -70,7 +70,7 @@ import (
 
 ---
 
-## 🚀 실행 및 테스트 (Let's Run!)
+### 🚀 실행 및 테스트 (Let's Run!)
 
 코드를 저장하고 터미널에서 실행해 봅시다. 이번에는 실시간 정보가 필요한 질문을 던져보는 것이 중요합니다.
 
@@ -90,7 +90,7 @@ go run main.go chat
 
 ---
 
-## 🔍 무엇이 일어난 건가요? (Under the Hood)
+### 🔍 무엇이 일어난 건가요? (Under the Hood)
 
 1.  사용자가 **"오늘 서울 날씨 어때?"**라고 묻습니다.
 2.  에이전트(LLM)는 자신이 가진 지식으로는 이 답을 알 수 없다고 판단합니다.
@@ -103,7 +103,7 @@ go run main.go chat
 
 ---
 
-## 💡 참고 사항
+### 💡 참고 사항
 
 *   **Grounding**: 이렇게 LLM이 외부 데이터(검색 결과 등)에 기반하여 답변하는 것을 **그라운딩(Grounding)**이라고 합니다. 이를 통해 할루시네이션(거짓 답변)을 줄이고 신뢰성을 높일 수 있습니다.
 *   **비용**: 검색 도구를 사용하면 일반적인 텍스트 생성 외에 검색에 대한 추가적인 API 호출이나 비용(Search Grounding)이 발생할 수 있습니다. (Google AI Studio 정책 참고)
@@ -111,3 +111,112 @@ go run main.go chat
 ---
 수고하셨습니다! 이제 여러분은 **"검색하는 AI 에이전트"**를 만들었습니다.
 다음 단계에서는 우리가 직접 만든 커스텀 도구를 에이전트에게 쥐어주는 방법을 알아볼 것입니다. 🚀
+
+---
+
+# Search Agent (도구(Tools)를 활용한 검색 에이전트 만들기)
+
+## English Version
+
+Welcome! 👋 Welcome to the second session.
+
+In the previous session, we built a basic conversational agent. However, that agent had limitations—it couldn't access information after its training cutoff date or real-time news.
+
+In this session, we will use ADK's powerful **Tools** system to give our agent **Google Search** capabilities. Now, your agent will be able to search for and answer questions using the latest information.
+
+### 🎯 Learning Objectives
+*   Understand the **ADK Tool Interface**.
+*   Integrate Google Search functionality using the `geminitool` package.
+*   Implement an agent that answers questions requiring real-time information.
+
+### 💻 Code Explanation
+
+This code is similar in structure to Session 1, but with the addition of **Tools** configuration. We will focus on the changes.
+
+### 1. Add Tool-related Packages
+```go
+import (
+    // ... existing imports omitted ...
+	"google.golang.org/adk/tool"
+	"google.golang.org/adk/tool/geminitool"
+    // ...
+)
+```
+*   `google.golang.org/adk/tool`: This is the core interface for defining and managing tools in ADK.
+*   `google.golang.org/adk/tool/geminitool`: This package contains predefined tools that the Gemini model can use, such as Google Search and code execution.
+
+### 2. Model Initialization (Same as Session 1)
+```go
+	model, err := gemini.NewModel(ctx,
+		"gemini-2.5-flash-lite",
+		&genai.ClientConfig{
+			APIKey: os.Getenv("GOOGLE_API_KEY"),
+		})
+    // ...
+```
+*   The Gemini model is initialized in the same way as before. Google Search functionality works very effectively with Gemini 2.5 and higher models.
+
+### 3. Equip the Agent with Tools (Key Change) ⭐
+This is the most crucial part. We add the `Tools` option when creating the agent.
+
+```go
+	// Although the variable name is timeAgent, its actual role is a search agent.
+	timeAgent, err := llmagent.New(llmagent.Config{
+		Name:        "search_agent", // Agent name changed
+		Model:       model,
+		Description: "A helpful agent that searches the web.", // Description updated
+		Instruction: "You are a helpful assistant. Use Google Search to answer the user's questions.", // Instruct to use search
+		
+        // [Key] Define the list of tools
+		Tools: []tool.Tool{
+			geminitool.GoogleSearch{}, // Add Google Search tool
+		},
+	})
+```
+*   **`Tools: []tool.Tool{...}`**: This is a list of tools that the agent can use.
+*   **`geminitool.GoogleSearch{}`**: With just this single line, the agent gains the ability to use the Google Search engine (Grounding with Google Search) without complex custom implementation.
+*   **`Instruction`**: By explicitly stating "Use Google Search" in the prompt, the model will better determine when to use the tool.
+
+### 4. Launcher Execution (Same as Session 1)
+```go
+	config := &launcher.Config{
+		AgentLoader: agent.NewSingleLoader(timeAgent),
+	}
+    // ... same execution logic ...
+```
+
+### 🚀 Run and Test (Let's Run!)
+
+Save the code and run it in the terminal. This time, it's important to ask questions that require real-time information.
+
+### 1. Run in Chat Mode
+```bash
+go run main.go chat
+```
+
+### 2. Example Questions (Comparison)
+
+**Q1. (Past Knowledge) "What is the capital of the United States?"**
+*   Since the model already knows this, it might answer directly without searching.
+
+**Q2. (Real-time Information) "Tell me the result of Son Heung-min's game yesterday" or "What's the weather like in Seoul today?"**
+*   **Session 1 Agent**: Would have replied, "Sorry, I cannot access real-time information."
+*   **Session 2 Agent**: Will internally perform a Google Search (Grounding) and generate an answer based on the latest information.
+
+### 🔍 What Happened? (Under the Hood)
+
+1.  The user asks, **"What's the weather like in Seoul today?"**
+2.  The agent (LLM) determines that it cannot answer this question with its internal knowledge.
+3.  However, it knows that a `geminitool.GoogleSearch` tool is available.
+4.  The agent itself generates a search query like **"Seoul weather"** and calls the tool.
+5.  Google search results are passed to the agent.
+6.  The agent summarizes the search results and delivers a natural answer to the user.
+
+All these processes are handled automatically between ADK and the Gemini model!
+
+### 💡 Notes
+
+*   **Grounding**: When an LLM generates answers based on external data (like search results), it's called **Grounding**. This helps reduce hallucinations (false answers) and increases reliability.
+*   **Cost**: Using search tools may incur additional API calls or costs (Search Grounding) beyond general text generation. (Refer to Google AI Studio policies).
+
+---
