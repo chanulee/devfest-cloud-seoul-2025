@@ -21,7 +21,7 @@ import (
 func main() {
 	ctx := context.Background()
 	// 1. Initialize Model (Use 2.0-flash if 2.5 is not available)
-	model, err := gemini.NewModel(ctx, "gemini-2.0-flash", &genai.ClientConfig{})
+	model, err := gemini.NewModel(ctx, "gemini-3-pro-preview", &genai.ClientConfig{})
 	if err != nil {
 		log.Fatalf("Failed to create model: %v", err)
 	}

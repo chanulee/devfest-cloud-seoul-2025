@@ -20,7 +20,7 @@
 ### 1. 모델 선정 (Speed is Key) ⚡
 ```go
 	// 라우팅은 속도가 생명! Gemini Flash 모델 사용
-	model, err := gemini.NewModel(ctx, "gemini-2.5-flash", ...)
+	model, err := gemini.NewModel(ctx, "gemini-3-pro-preview", ...)
 ```
 *   라우터는 사용자와의 대화 첫 관문입니다. 여기서 시간이 지체되면 전체 응답 속도가 느려집니다.
 *   따라서 가장 성능이 뛰어나고 비용이 저렴한 **Flash** 계열 모델이 라우팅 작업에 가장 적합합니다.
