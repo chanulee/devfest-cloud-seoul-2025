@@ -31,7 +31,7 @@ export GOOGLE_API_KEY="YOUR_ACTUAL_API_KEY"
     -   `google.golang.org/genai`: Gemini 모델에 대한 연결을 구성하는 데 사용되는 Google AI Go SDK입니다.
 -   **`func main()`**: 프로그램의 진입점입니다.
     -   `ctx := context.Background()`: Go에서 작업 관리를 위한 표준 관행인 백그라운드 컨텍스트를 초기화합니다.
-    -   `model, err := gemini.NewModel(...)`: 이 줄은 Gemini 언어 모델 인스턴스를 생성합니다. `"gemini-2.5-flash-lite"`를 모델 이름으로 지정하고 `GOOGLE_API_KEY` 환경 변수에서 가져온 API 키로 클라이언트를 구성합니다. 모델 생성에 대한 오류 처리도 포함되어 있습니다.
+    -   `model, err := gemini.NewModel(...)`: 이 줄은 Gemini 언어 모델 인스턴스를 생성합니다. `"gemini-3-pro-preview"`를 모델 이름으로 지정하고 `GOOGLE_API_KEY` 환경 변수에서 가져온 API 키로 클라이언트를 구성합니다. 모델 생성에 대한 오류 처리도 포함되어 있습니다.
     -   `rootAgent, err := llmagent.New(...)`: 핵심 AI 에이전트를 생성합니다. 이름(`"root_agent"`)이 부여되고 이전에 생성된 `model`에 연결되며, 동작을 정의하는 `Description` 및 `Instruction` ("당신은 유용한 비서입니다. 사용자의 질문에 답변하세요.")이 제공됩니다.
     -   `config := &launcher.Config{...}`: 에이전트 런처 구성을 설정합니다. `agent.NewSingleLoader(rootAgent)`는 애플리케이션 시작 시 `rootAgent`가 로드되도록 합니다.
     -   `l := full.NewLauncher()`: 에이전트의 수명 주기를 관리할 전체 런처를 초기화합니다.
@@ -67,7 +67,7 @@ Hello! How can I help you today?
 ### 💡 팁 & 트러블슈팅
 
 *   **403 Permission Denied**: `GOOGLE_API_KEY`가 올바르게 설정되었는지, 해당 키가 Gemini API를 사용할 권한이 있는지 확인하세요.
-*   **Model Not Found**: 코드에 적힌 모델명(`gemini-2.5-flash-lite`)이 현재 사용 가능한지 확인하세요. 만약 오류가 난다면 `gemini-2.5-flash`로 변경해 보세요.
+*   **Model Not Found**: 코드에 적힌 모델명(`gemini-3-pro-preview`)이 현재 사용 가능한지 확인하세요. 만약 오류가 난다면 `gemini-2.5-flash`로 변경해 보세요.
 *   **프롬프트 수정**: `Instruction` 필드의 내용을 바꿔보세요. (예: "You are a pirate."라고 입력하면 해적 말투로 대답합니다.)
 
 ---
@@ -109,7 +109,7 @@ This Go program sets up and runs a basic AI agent using the Gemini ADK. Here's a
     -   `google.golang.org/genai`: The Google AI Go SDK, used here to configure the connection to the Gemini model.
 -   **`func main()`**: The entry point of the program.
     -   `ctx := context.Background()`: Initializes a background context, which is standard practice in Go for managing operations.
-    -   `model, err := gemini.NewModel(...)`: This line creates an instance of the Gemini language model. It specifies `"gemini-2.5-flash-lite"` as the model name and configures the client with an API key fetched from the `GOOGLE_API_KEY` environment variable. Error handling is included for model creation.
+    -   `model, err := gemini.NewModel(...)`: This line creates an instance of the Gemini language model. It specifies `"gemini-3-pro-preview"` as the model name and configures the client with an API key fetched from the `GOOGLE_API_KEY` environment variable. Error handling is included for model creation.
     -   `rootAgent, err := llmagent.New(...)`: This creates the core AI agent. It's given a name (`"root_agent"`), linked to the `model` created earlier, and provided with a `Description` and `Instruction` that define its behavior ("You are a helpful assistant. Answer the user's questions.").
     -   `config := &launcher.Config{...}`: Sets up the configuration for the agent launcher. `agent.NewSingleLoader(rootAgent)` ensures that our `rootAgent` is loaded when the application starts.
     -   `l := full.NewLauncher()`: Initializes the full launcher, which will manage the agent's lifecycle.
@@ -142,6 +142,6 @@ After writing the code, run it in the terminal as follows:
 
 ### 💡 Tips & Troubleshooting
 *   **403 Permission Denied**: Check if `GOOGLE_API_KEY` is correctly set and has permission to use the Gemini API.
-*   **Model Not Found**: Verify that the model name specified in the code (`gemini-2.5-flash-lite`) is currently available. If an error occurs, try changing it to `gemini-2.5-flash`.
+*   **Model Not Found**: Verify that the model name specified in the code (`gemini-3-pro-preview`) is currently available. If an error occurs, try changing it to `gemini-3-pro-preview`.
 *   **Modify Prompt**: Try changing the content of the `Instruction` field (e.g., if you enter "You are a pirate.", it will respond in a pirate accent).
 
