@@ -20,7 +20,7 @@ func main() {
 
 	// 1. 모델 설정
 	model, err := gemini.NewModel(ctx,
-		"gemini-2.5-flash-lite",
+		"gemini-3-pro-preview",
 		&genai.ClientConfig{
 			APIKey: os.Getenv("GOOGLE_API_KEY"),
 		})

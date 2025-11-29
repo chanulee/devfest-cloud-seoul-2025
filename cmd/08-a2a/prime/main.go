@@ -62,8 +62,8 @@ func main() {
 	ctx := context.Background()
 
 	// 1. Gemini 모델 초기화
-	// 지정된 모델명("gemini-2.5-flash-lite")을 사용하여 클라이언트를 생성합니다.
-	model, _ := gemini.NewModel(ctx, "gemini-2.5-flash-lite", &genai.ClientConfig{})
+	// 지정된 모델명("gemini-3-pro-preview")을 사용하여 클라이언트를 생성합니다.
+	model, _ := gemini.NewModel(ctx, "gemini-3-pro-preview", &genai.ClientConfig{})
 
 	// 2. 도구(Tool) 생성
 	// 기존 소수 판별 도구
