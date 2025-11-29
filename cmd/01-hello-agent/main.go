@@ -20,8 +20,7 @@ func main() {
 		"gemini-3-pro-preview",
 		//"gemini-3-pro-preview",
 		&genai.ClientConfig{
-
-			APIKey: "AQ.Ab8RN6I2SdICj3Dn_eIk0g1HdXlypmi3JDP9Cl7y_9ju0ofFTw",
+			APIKey: os.Getenv("GOOGLE_API_KEY"),
 		})
 	if err != nil {
 		log.Fatalf("Failed to create model: %v", err)
