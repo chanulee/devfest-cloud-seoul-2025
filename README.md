@@ -1,67 +1,5 @@
 # Hands-on: Building AI Agents with Go ADK, devfest-cloud-seoul-2025
 
-## English Version
-
-This repository contains the hands-on session materials for DevFest Cloud Seoul 2025, focusing on building AI agents with Google's **Agent Development Kit (ADK) for Go** and the Gemini model.
-
-### Project Overview
-This project guides participants through various aspects of developing AI agents, progressing from fundamental concepts to advanced topics like multi-agent workflows and distributed systems. Each module in the `cmd/` directory represents a distinct hands-on session, offering practical experience with the ADK framework.
-
-### Hands-on Sessions
-
-#### 01-hello-agent: Hello Agent (First AI Agent)
-- **Goal**: Build a basic AI agent using Google's Agent Development Kit (ADK) for Go, based on the Gemini model. Understand ADK's core components: Model, Agent, and Launcher.
-- **Key Concepts**: Gemini Model, ADK Agent, ADK Launcher, Basic Agent Configuration.
-
-#### 02-search-tool: Search Agent (Tools for Search)
-- **Goal**: Enhance the agent with Google Search capabilities using ADK's Tools system to access real-time information.
-- **Key Concepts**: ADK Tool Interface (`google.golang.org/adk/tool`), Google Search Integration (`geminitool.GoogleSearch{}`), Instruction Tuning, Grounding.
-
-#### 03-custom-tools: Custom Tools (Creating Your Own Custom Tools)
-- **Goal**: Implement Function Calling, allowing the agent to execute custom Go functions for tasks like querying a database, calling internal APIs, or running specific business logic.
-- **Key Concepts**: Custom Tool Structure, `functiontool` Package, `jsonschema` Tags for argument information, Tool Chaining, `Description` Field importance.
-
-#### 04-structuring: Structured Output (Creating Structured Output)
-- **Goal**: Make the agent respond in a structured JSON format (Summary and Action Items) using ADK and Gemini's Output Schema feature.
-- **Key Concepts**: Output Schema (`genai.Schema`), Defining JSON Structures, Structured Data Generation, Use Cases (meeting minutes, data extraction, API integration).
-
-#### 05-structuring-tuned: Intelligent Router Agent (Intelligent Router Agent)
-- **Goal**: Create a Router Agent that classifies user intent and determines which agent should handle the request, rather than directly answering.
-- **Key Concepts**: Classifier Pattern, Enum Schema for restricted output, Flash Model Usage for speed, Negative Constraints in instructions, Metadata in Schema.
-
-#### 06-session-memory: Memory & Runner (Agent with Memory)
-- **Goal**: Give the agent "long-term memory" capabilities using ADK's `Runner` to control conversational flow and `Memory Service` to store and retrieve past conversations.
-- **Key Concepts**: `Runner` vs. `Launcher`, `Memory Service` (session & long-term memory), Memory Tool (`search_past_conversations`), Prompt Engineering for Korean search accuracy, Manual Memory Storage, RAG (Retrieval-Augmented Generation).
-
-#### 07-trip-planner: Parallel & Sequential (Multi-Agent Workflow)
-- **Goal**: Build a "Trip Planner Avengers" team by combining `Parallel Agent` and `Sequential Agent` to create a multi-agent workflow.
-- **Key Concepts**: Multi-Agent Architecture, `Parallel Agent` for concurrent execution, `Sequential Agent` for pipeline construction, `OutputKey` and `{variable}` syntax for context sharing, Division of Labor.
-
-#### 08-a2a: Agent-to-Agent (Remote Agents and A2A)
-- **Goal**: Learn ADK's powerful A2A (Agent-to-Agent) protocol to enable agents to communicate with and delegate tasks to remote agents running on different servers.
-- **Key Concepts**: Remote Agent Architecture (`web.Launcher`), A2A Protocol (Agent Card), Tool Expansion (multi-tool server agent), Client-Server Model, Microservices, Security, Language Agnosticism.
-
-### Getting Started
-
-Each session folder includes a `README.md` file with detailed instructions on how to set up the environment, run the specific examples, and explanations of the code.
-
-To run any of the examples, navigate to the respective module directory (e.g., `cmd/01-hello-agent`) and execute:
-
-```bash
-go mod tidy
-go run main.go [chat|run "Your question"]
-```
-*(Specific commands might vary slightly per session, refer to individual `README.md` files.)*
-
-### Prerequisites
-1.  **Go Installation**: Go version 1.21 or higher is required.
-2.  **Google Cloud Project & API Key**: An API key is needed to use the Gemini API.
-3.  **Environment Variable Setup**: Set your API key as the `GOOGLE_API_KEY` environment variable.
-    ```bash
-    export GOOGLE_API_KEY="YOUR_ACTUAL_API_KEY"
-    ```
-
----
 
 # 핸즈온: Go ADK를 활용한 AI 에이전트 구축, devfest-cloud-seoul-2025
 
@@ -120,6 +58,69 @@ go run main.go [chat|run "당신의 질문"]
 1.  **Go 설치**: Go 1.21 이상 버전이 필요합니다.
 2.  **Google Cloud Project & API Key**: Gemini API를 사용하기 위한 API 키가 필요합니다.
 3.  **환경 변수 설정**: API 키를 `GOOGLE_API_KEY` 환경 변수로 설정해야 합니다.
+    ```bash
+    export GOOGLE_API_KEY="YOUR_ACTUAL_API_KEY"
+    ```
+
+---
+
+## English Version
+
+This repository contains the hands-on session materials for DevFest Cloud Seoul 2025, focusing on building AI agents with Google's **Agent Development Kit (ADK) for Go** and the Gemini model.
+
+### Project Overview
+This project guides participants through various aspects of developing AI agents, progressing from fundamental concepts to advanced topics like multi-agent workflows and distributed systems. Each module in the `cmd/` directory represents a distinct hands-on session, offering practical experience with the ADK framework.
+
+### Hands-on Sessions
+
+#### 01-hello-agent: Hello Agent (First AI Agent)
+- **Goal**: Build a basic AI agent using Google's Agent Development Kit (ADK) for Go, based on the Gemini model. Understand ADK's core components: Model, Agent, and Launcher.
+- **Key Concepts**: Gemini Model, ADK Agent, ADK Launcher, Basic Agent Configuration.
+
+#### 02-search-tool: Search Agent (Tools for Search)
+- **Goal**: Enhance the agent with Google Search capabilities using ADK's Tools system to access real-time information.
+- **Key Concepts**: ADK Tool Interface (`google.golang.org/adk/tool`), Google Search Integration (`geminitool.GoogleSearch{}`), Instruction Tuning, Grounding.
+
+#### 03-custom-tools: Custom Tools (Creating Your Own Custom Tools)
+- **Goal**: Implement Function Calling, allowing the agent to execute custom Go functions for tasks like querying a database, calling internal APIs, or running specific business logic.
+- **Key Concepts**: Custom Tool Structure, `functiontool` Package, `jsonschema` Tags for argument information, Tool Chaining, `Description` Field importance.
+
+#### 04-structuring: Structured Output (Creating Structured Output)
+- **Goal**: Make the agent respond in a structured JSON format (Summary and Action Items) using ADK and Gemini's Output Schema feature.
+- **Key Concepts**: Output Schema (`genai.Schema`), Defining JSON Structures, Structured Data Generation, Use Cases (meeting minutes, data extraction, API integration).
+
+#### 05-structuring-tuned: Intelligent Router Agent (Intelligent Router Agent)
+- **Goal**: Create a Router Agent that classifies user intent and determines which agent should handle the request, rather than directly answering.
+- **Key Concepts**: Classifier Pattern, Enum Schema for restricted output, Flash Model Usage for speed, Negative Constraints in instructions, Metadata in Schema.
+
+#### 06-session-memory: Memory & Runner (Agent with Memory)
+- **Goal**: Give the agent "long-term memory" capabilities using ADK's `Runner` to control conversational flow and `Memory Service` to store and retrieve past conversations.
+- **Key Concepts**: `Runner` vs. `Launcher`, `Memory Service` (session & long-term memory), Memory Tool (`search_past_conversations`), Prompt Engineering for Korean search accuracy, Manual Memory Storage, RAG (Retrieval-Augmented Generation).
+
+#### 07-trip-planner: Parallel & Sequential (Multi-Agent Workflow)
+- **Goal**: Build a "Trip Planner Avengers" team by combining `Parallel Agent` and `Sequential Agent` to create a multi-agent workflow.
+- **Key Concepts**: Multi-Agent Architecture, `Parallel Agent` for concurrent execution, `Sequential Agent` for pipeline construction, `OutputKey` and `{variable}` syntax for context sharing, Division of Labor.
+
+#### 08-a2a: Agent-to-Agent (Remote Agents and A2A)
+- **Goal**: Learn ADK's powerful A2A (Agent-to-Agent) protocol to enable agents to communicate with and delegate tasks to remote agents running on different servers.
+- **Key Concepts**: Remote Agent Architecture (`web.Launcher`), A2A Protocol (Agent Card), Tool Expansion (multi-tool server agent), Client-Server Model, Microservices, Security, Language Agnosticism.
+
+### Getting Started
+
+Each session folder includes a `README.md` file with detailed instructions on how to set up the environment, run the specific examples, and explanations of the code.
+
+To run any of the examples, navigate to the respective module directory (e.g., `cmd/01-hello-agent`) and execute:
+
+```bash
+go mod tidy
+go run main.go [chat|run "Your question"]
+```
+*(Specific commands might vary slightly per session, refer to individual `README.md` files.)*
+
+### Prerequisites
+1.  **Go Installation**: Go version 1.21 or higher is required.
+2.  **Google Cloud Project & API Key**: An API key is needed to use the Gemini API.
+3.  **Environment Variable Setup**: Set your API key as the `GOOGLE_API_KEY` environment variable.
     ```bash
     export GOOGLE_API_KEY="YOUR_ACTUAL_API_KEY"
     ```
