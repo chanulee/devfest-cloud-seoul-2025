@@ -30,7 +30,7 @@ import (
 ### 2. 모델 초기화 (동일)
 ```go
 	model, err := gemini.NewModel(ctx,
-		"gemini-2.5-flash-lite",
+		"gemini-3-pro-preview",
 		&genai.ClientConfig{
 			APIKey: os.Getenv("GOOGLE_API_KEY"),
 		})
@@ -148,7 +148,7 @@ import (
 ### 2. Model Initialization (Same as Session 1)
 ```go
 	model, err := gemini.NewModel(ctx,
-		"gemini-2.5-flash-lite",
+		"gemini-3-pro-preview",
 		&genai.ClientConfig{
 			APIKey: os.Getenv("GOOGLE_API_KEY"),
 		})
