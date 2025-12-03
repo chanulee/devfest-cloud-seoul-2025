@@ -13,6 +13,10 @@ import (
 	"google.golang.org/genai"
 )
 
+// 구조화된 아웃풋 = 스키마
+// 설명을 잘 하는 것이 중요
+// json으로 구조를 정의를 해줘야
+
 func main() {
 	ctx := context.Background()
 
@@ -26,7 +30,7 @@ func main() {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	outputSchema := &genai.Schema{
+	outputSchema := &genai.Schema{ // gemini go 기본적인 구조
 		Type: genai.TypeObject,
 		Properties: map[string]*genai.Schema{
 			"summary":      {Type: genai.TypeString},
@@ -56,3 +60,8 @@ func main() {
 		log.Fatalf("Run failed: %v\n\n%s", err, l.CommandLineSyntax())
 	}
 }
+
+// tool + output structure --> 1 agent = 1 schema
+// 툴 + 스키마 하면 안됨
+// 툴로 검색을 하고 다른 에이전트한테 넘기고 걔가 구조화된 아웃풋을 주면 됨
+// system eng. = basically layered prompts and configurations

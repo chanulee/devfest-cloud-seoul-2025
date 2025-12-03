@@ -20,17 +20,20 @@ func main() {
 	ctx := context.Background()
 
 	model, err := gemini.NewModel(ctx,
-		"gemini-3-pro-preview",
+		"gemini-2.5-flash",
 		//"gemini-3-pro-preview",
 		&genai.ClientConfig{
-			APIKey: os.Getenv("GOOGLE_API_KEY"),
+			APIKey: "AIzaSyCd8mFAuCpibAU11AI5WkjsmF1wl_c8u0Y",
 		})
 	if err != nil {
 		log.Fatalf("Failed to create model: %v", err)
 	}
 
-	weatherTool, _ := functiontool.New(functiontool.Config{
-		Name: "get_weather", Description: "Get weather for a city"},
+	// 1 agent = 1 tool
+	// 2 tools mean 2 agents
+
+	weatherTool, _ := functiontool.New(functiontool.Config{ // main에서 이걸 한번 불러줘야 함
+		Name: "get_weather", Description: "Get weather for a city"}, // 이 설명이 엄청 상세하게 적혀있어야 함
 		getWeather,
 	)
 

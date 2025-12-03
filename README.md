@@ -1,7 +1,11 @@
+# Personal notes on Hands-on: Building AI Agents with Go ADK, devfest-cloud-seoul-2025
+
+Main notes and comments are in [cmd/00/README.md](cmd/00/README.md)
+
+---------
+
+
 # Hands-on: Building AI Agents with Go ADK, devfest-cloud-seoul-2025
-
-
-# 핸즈온: Go ADK를 활용한 AI 에이전트 구축, devfest-cloud-seoul-2025
 
 이 저장소는 DevFest Cloud Seoul 2025에서 Google의 **Go용 Agent Development Kit (ADK)** 와 Gemini 모델을 활용하여 AI 에이전트를 구축하는 핸즈온 세션 자료를 포함합니다.
 
