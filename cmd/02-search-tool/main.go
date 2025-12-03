@@ -19,10 +19,10 @@ func main() {
 	ctx := context.Background()
 
 	model, err := gemini.NewModel(ctx,
-		"gemini-2.5-flash",
+		"gemini-3-pro-preview",
 		//"gemini-3-pro-preview",
 		&genai.ClientConfig{
-			APIKey: "AIzaSyCd8mFAuCpibAU11AI5WkjsmF1wl_c8u0Y",
+			APIKey: os.Getenv("GOOGLE_API_KEY"),
 		})
 	if err != nil {
 		log.Fatalf("Failed to create model: %v", err)
@@ -34,7 +34,7 @@ func main() {
 		Description: "A helpful agent that searches the web.",
 		Instruction: "You are a helpful assistant. Use Google Search to answer the user's questions.",
 		Tools: []tool.Tool{
-			geminitool.GoogleSearch{}, // 기본적으로 gemini에서 지원하는 툴 - https://ai.google.dev/gemini-api/docs/tools
+			geminitool.GoogleSearch{},
 		},
 	})
 

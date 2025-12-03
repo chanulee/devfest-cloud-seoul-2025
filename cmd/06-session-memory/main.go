@@ -25,11 +25,6 @@ type Args struct {
 	Query string `json:"query" jsonschema:"The query to search for in the memory."`
 }
 
-// 저장- 어디에? 그걸 어떻게 검색해서 다시 가져오는건 어떻게?
-// 그걸 툴링을 통해서 한다
-// wtf is launcher exactly?
-// when the launcher runs, event happens
-
 type Result struct {
 	Results []string `json:"results"`
 }

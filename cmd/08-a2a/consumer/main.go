@@ -15,12 +15,6 @@ import (
 	"google.golang.org/genai"
 )
 
-// 에이전트 워크플로우
-// 워크플로우를 다른 서버로 쪼개는 것 리소스를 분리하거나 등
-// 그때 그 사이 통신이 A2A
-// prime: 서버 = 여러가지 함수들 서버도 여기서 직접 돌리고
-// consumer: remoteagent (llm agent) 얘도 일종의 툴처럼 작용하기 때문에
-
 func main() {
 	ctx := context.Background()
 
